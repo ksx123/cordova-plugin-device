@@ -89,6 +89,7 @@
              @"version": [device systemVersion],
              @"uuid": [self uniqueAppInstanceIdentifier:device],
              @"cordova": [[self class] cordovaVersion],
+             @"native_version": [[NSBundle mainBundle] objectForInfoDictionaryKey: @"CFBundleShortVersionString"],
              @"isVirtual": @([self isVirtual])
              };
 }

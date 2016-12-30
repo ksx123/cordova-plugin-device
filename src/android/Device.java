@@ -76,6 +76,7 @@ public class Device extends CordovaPlugin {
             r.put("manufacturer", this.getManufacturer());
 	        r.put("isVirtual", this.isVirtual());
             r.put("serial", this.getSerialNumber());
+            r.put("native_version", this.getNativeVersion());
             callbackContext.success(r);
         }
         else {
@@ -87,12 +88,23 @@ public class Device extends CordovaPlugin {
     //--------------------------------------------------------------------------
     // LOCAL METHODS
     //--------------------------------------------------------------------------
-
+    
+    public String getNativeVersion(){
+        try {
+            return cordova.getActivity().getPackageManager().getPackageInfo(cordova.getActivity().getPackageName(), 0).versionName;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return "";
+        }
+    }
+    
     /**
      * Get the OS name.
      *
      * @return
      */
+    
     public String getPlatform() {
         String platform;
         if (isAmazonDevice()) {
